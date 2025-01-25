@@ -7,7 +7,7 @@
 [[-0.5, 1.0, -1.5], [2.0, -2.5, 3.0]]
 >>> matrix_divided([[5, 10], [15, 20]], 0.5)
 [[10.0, 20.0], [30.0, 40.0]]
->>> matrix_divided([[1, 2], [3, 4]], 0)
+>>> matrix_divided([[1, 2], [3, 4]], "string")
 Traceback (most recent call last):
     ...
-ZeroDivisionError: division by zero
+TypeError: div must be a number
