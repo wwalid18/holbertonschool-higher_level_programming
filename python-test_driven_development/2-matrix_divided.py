@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module provides a function to add two integers.
+This module provides a function to devide amatrix
 
 Examples:
 >>> matrix_divided([[1, 2, 3], [4, 5, 6]], 3)
