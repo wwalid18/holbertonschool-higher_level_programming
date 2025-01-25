@@ -49,7 +49,7 @@ def text_indentation(text):
     Raises:
     TypeError: If the input is not a string.
     """
-    if not isinstance(text, str):
+    if not isinstance(text, str) or text == "":
         raise TypeError("text must be a string")
     i = 0
     length = len(text)
