@@ -45,23 +45,24 @@ def text_indentation(text):
     TypeError: If the input is not a string.
     """
     
+    # Check if input is a string
     if not isinstance(text, str):
         raise TypeError("text must be a string")
     
-    if text == "":
-        raise TypeError("text must be a string")
-    
-    punctuation = ".?:"
+    # Process the text character by character
     i = 0
     length = len(text)
     
     while i < length:
+        # Print each character in the string
         print(text[i], end="")
         
-        # Check for punctuation marks and print new line only once
-        if text[i] in punctuation:
-            print()  # Print only one newline after the punctuation
-            # Skip consecutive spaces after punctuation
+        # Check if the character is a punctuation mark
+        if text[i] in ".?:":
+            # Print a new line after punctuation mark
+            print()
+            # Skip any following spaces after punctuation mark
             while i + 1 < length and text[i + 1] == " ":
-                i += 1  # Skip spaces
+                i += 1
+        
         i += 1
