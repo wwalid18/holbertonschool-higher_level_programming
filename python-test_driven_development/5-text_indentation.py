@@ -58,7 +58,7 @@ def text_indentation(text):
     while i < length:
         print(text[i], end="")
         if text[i] in punctuation:
-            print()  # Only print one newline
+            print()
             while i + 1 < length and text[i + 1] == " ":
-                i += 1  # Skip any spaces after punctuation
+                i += 1
         i += 1
