@@ -41,22 +41,26 @@ TypeError: text must be a string
 
 def text_indentation(text):
     """
-    Prints a text with 2 new lines after each of these characters: ., ? and :.
-
+    Prints a text with 2 new lines after each of
+    these characters: '.', '?', and ':'.
     Args:
-    text (str): The input string.
-
+    text (str): The string to be processed.
     Raises:
     TypeError: If the input is not a string.
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
+
     i = 0
     length = len(text)
+
     while i < length:
+        # Print the current character
         print(text[i], end="")
+        # If we encounter '.', '?', or ':', print two new lines and skip spaces
         if text[i] in '.?:':
             print("\n")
+            # Skip spaces
             while i + 1 < length and text[i + 1] == " ":
                 i += 1
         i += 1
