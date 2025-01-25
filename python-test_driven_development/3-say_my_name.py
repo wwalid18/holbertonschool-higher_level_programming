@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-This module provides a function to devide amatrix
+This module provides a function to print name and lastname
 
 Examples:
 >>> say_my_name("John", "Smith")
