@@ -4,9 +4,7 @@ This module provides a function that prints a text without indentation.
 
 Examples:
 >>> text_indentation = __import__('5-text_indentation').text_indentation
->>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere?
-Non autem hoc: igitur ne illud quidem.")
+>>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? Non autem hoc: igitur ne illud quidem.")
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
 Quonam modo?
@@ -37,7 +35,6 @@ Traceback (most recent call last):
 TypeError: text must be a string
 """
 
-
 def text_indentation(text):
     """
     Prints a text with 2 new lines after each of
@@ -47,18 +44,24 @@ def text_indentation(text):
     Raises:
     TypeError: If the input is not a string.
     """
-
+    
     if not isinstance(text, str):
         raise TypeError("text must be a string")
+    
     if text == "":
         raise TypeError("text must be a string")
+    
     punctuation = ".?:"
     i = 0
     length = len(text)
+    
     while i < length:
         print(text[i], end="")
+        
+        # Check for punctuation marks and print new line only once
         if text[i] in punctuation:
-            print()
+            print()  # Print only one newline after the punctuation
+            # Skip consecutive spaces after punctuation
             while i + 1 < length and text[i + 1] == " ":
-                i += 1
+                i += 1  # Skip spaces
         i += 1
