@@ -50,17 +50,12 @@ def text_indentation(text):
     """
     if not isinstance(text, str):
         raise TypeError("text must be a string")
-
     i = 0
     length = len(text)
-
     while i < length:
-        # Print the current character
         print(text[i], end="")
-        # If we encounter '.', '?', or ':', print two new lines and skip spaces
         if text[i] in '.?:':
             print("\n")
-            # Skip spaces
             while i + 1 < length and text[i + 1] == " ":
                 i += 1
         i += 1
