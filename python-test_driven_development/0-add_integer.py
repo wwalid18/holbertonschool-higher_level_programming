@@ -3,7 +3,6 @@
 def add_integer(a, b=98):
     """
     Adds two integers or floats, rounding them to the nearest integer.
-    
     Args:
     a (int, float): The first integer or float.
     b (int, float): The second integer or float. Default is 98.
@@ -18,5 +17,4 @@ def add_integer(a, b=98):
         raise TypeError("a must be an integer")
     if type(b) not in [int, float]:
         raise TypeError("b must be an integer")
-    
     return round(a) + round(b)
