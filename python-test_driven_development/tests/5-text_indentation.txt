@@ -1,0 +1,31 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+>>> text_indentation("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere? Non autem hoc: igitur ne illud quidem.")
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+Quonam modo?
+
+Utrum igitur tibi litteram videor an totas paginas commovere?
+
+Non autem hoc:
+
+igitur ne illud quidem.
+>>> text_indentation("This is a test. It works well. Does it? Yes.")
+This is a test.
+
+It works well.
+
+Does it?
+
+Yes.
+>>> text_indentation("Hello world: this is a test.")
+Hello world:
+
+this is a test.
+>>> text_indentation(123)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
+>>> text_indentation("")
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
