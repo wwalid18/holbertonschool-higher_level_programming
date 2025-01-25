@@ -8,14 +8,21 @@ Examples:
 Quonam modo? Utrum igitur tibi litteram videor an totas paginas commovere?
 Non autem hoc: igitur ne illud quidem.")
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
 Quonam modo?
+
 Utrum igitur tibi litteram videor an totas paginas commovere?
+
 Non autem hoc:
+
 igitur ne illud quidem.
 >>> text_indentation("This is a test. It works well. Does it? Yes.")
 This is a test.
+
 It works well.
+
 Does it?
+
 Yes.
 >>> text_indentation("Hello world: this is a test.")
 Hello world:
@@ -46,11 +53,12 @@ def text_indentation(text):
     if text == "":
         raise TypeError("text must be a string")
     punctuation = ".?:"
-    current_text = ""
-    for char in text:
-        current_text += char
-        if char in punctuation:
-            print(current_text.strip())
-            current_text = ""
-    if current_text:
-        print(current_text.strip())
+    i = 0
+    length = len(text)
+    while i < length:
+        print(text[i], end="")
+        if text[i] in punctuation:
+            print()  # Only print one newline
+            while i + 1 < length and text[i + 1] == " ":
+                i += 1  # Skip any spaces after punctuation
+        i += 1
