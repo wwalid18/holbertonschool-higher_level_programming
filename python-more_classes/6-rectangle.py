@@ -58,5 +58,3 @@ class Rectangle:
         print("Bye rectangle...")
         if Rectangle.number_of_instances > 0:
             Rectangle.number_of_instances -= 1
-
-
