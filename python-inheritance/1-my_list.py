@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Module for MyList class.
+>>> MyList = __import__('1-my_list').MyList
 """
 
 
