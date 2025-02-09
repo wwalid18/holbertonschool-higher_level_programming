@@ -41,5 +41,5 @@ class Rectangle(Shape):
 
 def shape_info(shape):
     # Ensuring no extra spaces or lines
-    print(f"Area: {shape.area():.10f}")
-    print(f"Perimeter: {shape.perimeter():.10f}")
+    print(f"Area: {shape.area():.14f}")
+    print(f"Perimeter: {shape.perimeter():.14f}")
