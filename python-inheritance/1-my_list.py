@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
->>> MyList = __import__('1-my_list').MyList
-"""
+"""Module that defines the MyList class"""
 
 
 class MyList(list):
