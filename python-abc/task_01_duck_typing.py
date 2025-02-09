@@ -4,7 +4,7 @@ import math
 
 
 class Shape(ABC):
-    """Abstract base class shape"""
+    """Abstract base class for shapes"""
     @abstractmethod
     def area(self):
         pass
@@ -15,7 +15,7 @@ class Shape(ABC):
 
 
 class Circle(Shape):
-    """Concrete class Circle"""
+    """Concrete class for Circle"""
     def __init__(self, radius):
         self.radius = radius
 
@@ -27,7 +27,7 @@ class Circle(Shape):
 
 
 class Rectangle(Shape):
-    """Concrete class Rectangle"""
+    """Concrete class for Rectangle"""
     def __init__(self, width, height):
         self.width = width
         self.height = height
