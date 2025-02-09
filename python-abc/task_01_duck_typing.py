@@ -15,7 +15,7 @@ class Shape(ABC):
 
 
 class Circle(Shape):
-    """Abstract base class circle"""
+    """Concrete class Circle"""
     def __init__(self, radius):
         self.radius = radius
 
@@ -27,7 +27,7 @@ class Circle(Shape):
 
 
 class Rectangle(Shape):
-    """Abstract base class rectangle"""
+    """Concrete class Rectangle"""
     def __init__(self, width, height):
         self.width = width
         self.height = height
@@ -40,5 +40,5 @@ class Rectangle(Shape):
 
 
 def shape_info(shape):
-    print(f"Area: {shape.area()}", end="\n")
-    print(f"Perimeter: {shape.perimeter()}", end="\n")
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
