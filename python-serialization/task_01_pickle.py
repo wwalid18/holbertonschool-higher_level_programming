@@ -30,4 +30,3 @@ class CustomObject:
         """Deserialize the object from a file"""
         with open(filename, "rb") as file:
             return pickle.load(file)
-
