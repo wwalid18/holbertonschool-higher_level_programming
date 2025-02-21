@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import requests
 import json
+"""api = 'https://jsonplaceholder.typicode.com/posts'"""
 
 
 def fetch_and_print_posts():
