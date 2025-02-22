@@ -1,8 +1,10 @@
 import http.server
 import json
+import socketserver
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
+    """Handles HTTP requests for different endpoints."""
     def do_GET(self):
         if self.path == '/':
             self.send_response(200)
@@ -46,13 +48,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(b"404 Not Found")
 
 
-def run(server_class=http.server.HTTPServer, handler_class=Handler):
-    """Starts the HTTP server."""
-    server_address = ('', 8000)
-    httpd = server_class(server_address, handler_class)
-    print("Server started at http://localhost:8000")
+PORT = 8000
+
+
+with socketserver.TCPServer(("0.0.0.0", PORT), Handler) as httpd:
+    print(f"Serving on port {PORT}...")
     httpd.serve_forever()
-
-
-if __name__ == "__main__":
-    run()
