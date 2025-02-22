@@ -47,7 +47,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(b"404 Not Found")
 
 
-def run(server_class=http.server.HTTPServer, handler_class=SimpleHandler):
+def run(server_class=http.server.HTTPServer, handler_class=Handler):
     """Starts the HTTP server."""
     server_address = ('', 8000)
     httpd = server_class(server_address, handler_class)
