@@ -1,6 +1,5 @@
 import http.server
 import json
-import socketserver
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
