@@ -1,3 +1,7 @@
+#!/usr/bin/python3
+"""
+This is the ``task_04_flask`` module
+"""
 from flask import Flask, jsonify, request
 
 
