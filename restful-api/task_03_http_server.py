@@ -1,6 +1,5 @@
 import http.server
 import json
-import socketserver
 
 
 class Handler(http.server.BaseHTTPRequestHandler):
@@ -47,9 +46,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(b"404 Not Found")
 
 
-PORT = 8000
-
-
-with socketserver.TCPServer(("0.0.0.0", PORT), Handler) as httpd:
-    print(f"Serving on port {PORT}...")
+def run(server_class=http.server.HTTPServer, handler_class=Handler):
+    """Starts the HTTP server."""
+    server_address = ('', 8000)
+    httpd = server_class(server_address, handler_class)
+    print("Server started at http://localhost:8000")
     httpd.serve_forever()
+
+
+if __name__ == "__main__":
+    run()
