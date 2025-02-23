@@ -1,50 +1,39 @@
-#!/usr/bin/python3
-"""
-This is the ``task_04_flask`` module
-"""
 from flask import Flask, jsonify, request
 
-
 app = Flask(__name__)
+
+# In-memory storage for users
 users = {
-    "jane": {
-        "username": "jane", "name": "Jane", "age": 28, "city": "Los Angeles"
-    },
-    "john": {
-        "username": "john", "name": "John", "age": 30, "city": "New York"
-    },
+    "jane": {"username": "jane", "name": "Jane", "age": 28, "city": "Los Angeles"},
+    "john": {"username": "john", "name": "John", "age": 30, "city": "New York"}
 }
 
-
-@app.route('/')
+# Root endpoint
+@app.route("/")
 def home():
-    """Handle root URL"""
     return "Welcome to the Flask API!"
 
-
-@app.route('/data')
-def data():
-    """Display data"""
+# Endpoint to get all usernames
+@app.route("/data")
+def get_usernames():
     return jsonify(list(users.keys()))
 
-
-@app.route('/status')
+# Status endpoint
+@app.route("/status")
 def status():
-    """Display Status"""
     return "OK"
 
-
-@app.route('/users/<username>')
-def userInfo(username):
-    """Display specified user"""
-    if username in users:
-        return jsonify(users[username])
+# Endpoint to get user details
+@app.route("/users/<username>")
+def get_user(username):
+    user = users.get(username)
+    if user:
+        return jsonify(user)
     return jsonify({"error": "User not found"}), 404
 
-
-@app.route('/add_user', methods=['POST'])
+# Endpoint to add a new user
+@app.route("/add_user", methods=["POST"])
 def add_user():
-    """Add a new user"""
     data = request.get_json()
     if not data or "username" not in data:
         return jsonify({"error": "Username is required"}), 400
@@ -55,7 +44,6 @@ def add_user():
     
     users[username] = data
     return jsonify({"message": "User added", "user": data}), 201
-
 
 if __name__ == "__main__":
     app.run(debug=True)
