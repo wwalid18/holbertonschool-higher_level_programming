@@ -22,15 +22,12 @@ class State(Base):
 
 
 if __name__ == "__main__":
-    # Check input arguments
     if len(sys.argv) != 4:
         print(f"Usage: {sys.argv[0]} "
               "<username> <password> <database>")
         sys.exit(1)
 
-    # Create an engine that connects to the MySQL server
     engine = create_engine('mysql+mysqldb://{}:{}@localhost:3306/{}'.format(
         sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
 
-    # Create all tables in the engine
     Base.metadata.create_all(engine)
