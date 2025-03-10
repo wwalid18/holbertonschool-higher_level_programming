@@ -7,9 +7,7 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
-
     username, password, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
-
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -18,12 +16,9 @@ if __name__ == "__main__":
         db=db_name,
         charset="utf8"
     )
-
     cur = db.cursor()
     cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-
     for row in cur.fetchall():
         print(row)
-
     cur.close()
     db.close()
