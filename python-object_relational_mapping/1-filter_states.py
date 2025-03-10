@@ -7,9 +7,6 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print(f"Usage: {sys.argv[0]} <username> <password> <database>")
-        sys.exit(1)
 
     username, password, db_name = sys.argv[1], sys.argv[2], sys.argv[3]
     db = MySQLdb.connect(
@@ -20,7 +17,8 @@ if __name__ == "__main__":
         db=db_name
     )
     cur = db.cursor()
-    cur.execute("SELECT * FROM states WHERE BINARY name LIKE 'N%' ORDER BY id ASC")
+    cur.execute(
+        "SELECT * FROM states WHERE BINARY name LIKE 'N%' ORDER BY id ASC")
     for row in cur.fetchall():
         print(row)
     cur.close()
