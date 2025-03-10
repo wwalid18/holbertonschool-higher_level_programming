@@ -13,10 +13,6 @@ from sqlalchemy.orm import sessionmaker
 
 if __name__ == "__main__":
 
-    if len(sys.argv) != 4:
-        print("Usage: ./7-model_state_fetch_all.py <mysql username> <mysql password> <database name>")
-        sys.exit(1)
-
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
