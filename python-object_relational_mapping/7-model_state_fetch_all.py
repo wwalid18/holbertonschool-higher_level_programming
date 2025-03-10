@@ -6,12 +6,16 @@ and database name.
 Results are sorted in ascending order by states.id.
 """
 
-from sqlalchemy import (create_engine)
+from sqlalchemy import create_engine
 import sys
 from model_state import Base, State
 from sqlalchemy.orm import sessionmaker
 
 if __name__ == "__main__":
+
+    if len(sys.argv) != 4:
+        print("Usage: ./7-model_state_fetch_all.py <usr n> <pw> <db name>")
+        sys.exit(1)
 
     username = sys.argv[1]
     password = sys.argv[2]
