@@ -14,7 +14,7 @@ from sqlalchemy.orm import sessionmaker
 if __name__ == "__main__":
 
     if len(sys.argv) != 4:
-        print("Usage: ./7-model_state_fetch_all.py <usr n> <pw> <db name>")
+        print("Usage: ./7-model_state_fetch_all.py <mysql username> <mysql password> <database name>")
         sys.exit(1)
 
     username = sys.argv[1]
@@ -22,10 +22,8 @@ if __name__ == "__main__":
     database = sys.argv[3]
 
     engine = create_engine(
-        f'mysql+mysqldb://{username}:{password}@localhost/',
-        database, pool_pre_ping=True
+        f'mysql+mysqldb://{username}:{password}@localhost/{database}', pool_pre_ping=True
     )
-
     Session = sessionmaker(bind=engine)
     session = Session()
 
