@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
-Lists all states where the name matches in the database hbtn_0e_0_usa
+Lists all cities in the database hbtn_0e_4_usa,
+sorted by cities.id,
+with their associated state name.
 """
 
 import MySQLdb
@@ -11,7 +13,6 @@ if __name__ == "__main__":
     username = sys.argv[1]
     password = sys.argv[2]
     db_name = sys.argv[3]
-    state_name = sys.argv[4]
 
     db = MySQLdb.connect(
         host="localhost",
@@ -23,10 +24,12 @@ if __name__ == "__main__":
     )
 
     cur = db.cursor()
-    query = (
-        "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC"
-        .format(state_name)
-    )
+    query = """
+    SELECT cities.id, cities.name, states.name
+    FROM cities
+    JOIN states ON cities.state_id = states.id
+    ORDER BY cities.id ASC
+    """
     cur.execute(query)
 
     for row in cur.fetchall():
