@@ -1,8 +1,5 @@
 #!/usr/bin/python3
-"""
-file that contains the class definition of a State
-and an instance Base = declarative_base()
-"""
+"""Define the State class and connect to the database"""
 
 from sqlalchemy import Column, Integer, String, create_engine
 from sqlalchemy.ext.declarative import declarative_base
