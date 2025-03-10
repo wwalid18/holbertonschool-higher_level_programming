@@ -1,6 +1,6 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """
-Lists all states where the name matches in the database hbtn_0e_0_usa
+Listing all the states from a db
 """
 
 import MySQLdb
@@ -8,27 +8,38 @@ import sys
 
 if __name__ == "__main__":
 
-    username = sys.argv[1]
-    password = sys.argv[2]
-    db_name = sys.argv[3]
+    # Check input arguments
+    if len(sys.argv) != 5:
+        print(f"Usage: {sys.argv[0]} "
+              "<username> <password> <database> <state name>")
+        sys.exit(1)
+
+    # Catch db credentials
+    MY_HOST = "localhost"
+    MY_USER = sys.argv[1]
+    MY_PASS = sys.argv[2]
+    MY_DB = sys.argv[3]
     state_name = sys.argv[4]
 
-    db = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=username,
-        passwd=password,
-        db=db_name,
-        charset="utf8"
-    )
+    # Connection to DB
+    db = MySQLdb.connect(host=MY_HOST,
+                         user=MY_USER,
+                         passwd=MY_PASS,
+                         db=MY_DB,
+                         port=3306
+                         )
 
-    cur = db.cursor()
-    cur.execute(
+    # Cursor creation to execute SQL queries
+    cursor = db.cursor()
+
+    # Print results in comma delimited format
+    cursor.execute(
         "SELECT * FROM states WHERE BINARY name = %s", (state_name,))
 
-    results = cur.fetchall()
-    for row in results:
+    rows = cursor.fetchall()
+    for row in rows:
         print(row)
 
-    cur.close()
+    # Close connection with db
+    cursor.close()
     db.close()
