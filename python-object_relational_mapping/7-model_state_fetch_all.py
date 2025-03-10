@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """
-lists all State objects
+Lists all State objects from the database hbtn_0e_6_usa.
+The script takes 3 arguments: mysql username, mysql password, and database name.
+Results are sorted in ascending order by states.id.
 """
 
 from sqlalchemy import (create_engine)
@@ -9,20 +11,24 @@ from model_state import Base, State
 from sqlalchemy.orm import sessionmaker
 
 if __name__ == "__main__":
-
+    # Check if correct number of arguments are provided
     if len(sys.argv) != 4:
-        print(f"Usage: {sys.argv[0]} "
-              "<mysql username> <mysql password> <database name>")
+        print("Usage: ./7-model_state_fetch_all.py <mysql username> <mysql password> <database name>")
         sys.exit(1)
 
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    # Get arguments
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
-    Base.metadata.create_all(engine)
-
+    # Create engine and session
+    engine = create_engine(f'mysql+mysqldb://{username}:{password}@localhost/{database}', pool_pre_ping=True)
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    for state in session.query(State).order_by(State.id):
+    # Query all states ordered by ID
+    states = session.query(State).order_by(State.id).all()
+
+    # Print results
+    for state in states:
         print(f"{state.id}: {state.name}")
-    session.close()
