@@ -11,34 +11,22 @@ from model_state import Base, State
 
 if __name__ == "__main__":
 
-    # Validate argument count
     if len(sys.argv) != 4:
-        print("Usage: ./8-model_state_fetch_first.py <sqlun> <sqlpw> <dbname>")
+        print(f"Usage: {sys.argv[0]} "
+              "<mysql username> <mysql password> <database name>")
         sys.exit(1)
 
-    # Extract command-line arguments
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
+    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
+        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
 
-    # Create engine
-    engine = create_engine(
-        f"mysql+mysqldb://{username}:{password}@localhost/{database}",
-        pool_pre_ping=True
-    )
+    Base.metadata.create_all(engine)
 
-    # Create session
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    # Fetch the first State object
-    first_state = session.query(State).order_by(State.id).first()
-
-    # Print result
-    if first_state:
-        print(f"{first_state.id}: {first_state.name}")
+    state = session.query(State).order_by(State.id).first()
+    if state:
+        print(f"{state.id}: {state.name}")
     else:
         print("Nothing")
-
-    # Close session
     session.close()
