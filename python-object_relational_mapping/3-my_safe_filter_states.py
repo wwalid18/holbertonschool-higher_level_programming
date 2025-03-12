@@ -1,13 +1,17 @@
 #!/usr/bin/python3
 """
-Lists all states where the name matches in the database hbtn_0e_0_usa
+Displays all values in the states table of hbtn_0e_0_usa
+where name matches the argument (safe from SQL injection).
 """
 
 import MySQLdb
 import sys
 
+
 if __name__ == "__main__":
-    """main"""
+    """
+    Uses parameterized queries to prevent SQL injection.
+    """
 
     username = sys.argv[1]
     password = sys.argv[2]
