@@ -1,38 +1,43 @@
 #!/usr/bin/python3
 """
-Displays all values in the states table of hbtn_0e_0_usa
-where name matches the argument (safe from SQL injection).
+Listing states from a db
 """
 
 import MySQLdb
 import sys
 
-
 if __name__ == "__main__":
-    """
-    Uses parameterized queries to prevent SQL injection.
-    """
 
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
+    # Check input arguments
+    if len(sys.argv) != 5:
+        print(f"Usage: {sys.argv[0]} "
+              "<username> <password> <database> <state name>")
+        sys.exit(1)
+
+    # Catch db credentials
+    MY_HOST = "localhost"
+    MY_USER = sys.argv[1]
+    MY_PASS = sys.argv[2]
+    MY_DB = sys.argv[3]
     state_name = sys.argv[4]
 
-    db = MySQLdb.connect(
-        host="localhost",
-        user=username,
-        passwd=password,
-        db=database,
-        port=3306
-    )
+    # Connection to DB
+    db = MySQLdb.connect(host=MY_HOST,
+                         user=MY_USER,
+                         passwd=MY_PASS,
+                         db=MY_DB,
+                         port=3306
+                         )
 
-    cur = db.cursor()
-    query = "SELECT * FROM states WHERE name LIKE BINARY %s ORDER BY id ASC"
+    # Cursor creation to execute SQL queries
+    cursor = db.cursor()
 
-    cur.execute(query, (state_name,))
-
-    for row in cur.fetchall():
+    # Print results in comma delimited format
+    cursor.execute("SELECT * FROM states WHERE name = %s", (state_name,))
+    rows = cursor.fetchall()
+    for row in rows:
         print(row)
 
-    cur.close()
+    # Close connection with db
+    cursor.close()
     db.close()
