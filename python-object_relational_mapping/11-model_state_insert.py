@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-Prints the State object with the name passed as an
-argument from the database hbtn_0e_6_usa.
-If no state is found, it prints "Not found".
+Adds the State object "Louisiana" to the database hbtn_0e_6_usa.
+Prints the new state's id after creation.
 """
 
 import sys
@@ -11,7 +10,6 @@ from sqlalchemy.orm import sessionmaker
 from model_state import Base, State
 
 if __name__ == "__main__":
-
     if len(sys.argv) != 4:
         print(f"Usage: {sys.argv[0]} "
               "<mysql username> <mysql password> <database name>")
@@ -20,7 +18,6 @@ if __name__ == "__main__":
     username = sys.argv[1]
     password = sys.argv[2]
     database = sys.argv[3]
-    state_name = sys.argv[4]
 
     engine = create_engine(
         f"mysql+mysqldb://{username}:{password}@localhost/{database}",
@@ -30,11 +27,10 @@ if __name__ == "__main__":
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    state = session.query(State).filter(State.name == state_name).first()
+    new_state = State(name="Louisiana")
+    session.add(new_state)
+    session.commit()
 
-    if state:
-        print(state.id)
-    else:
-        print("Not found")
+    print(new_state.id)
 
     session.close()
