@@ -7,6 +7,7 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
+    """main"""
 
     username = sys.argv[1]
     password = sys.argv[2]
@@ -23,7 +24,7 @@ if __name__ == "__main__":
     )
 
     cur = db.cursor()
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+    query = "SELECT * FROM states WHERE name LIKE BINARY %s ORDER BY id ASC"
     cur.execute(query, (state_name,))
 
     for row in cur.fetchall():
