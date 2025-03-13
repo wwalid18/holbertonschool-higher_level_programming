@@ -16,17 +16,25 @@ if __name__ == "__main__":
               "<mysql username> <mysql password> <database name>")
         sys.exit(1)
 
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'.format(
-        sys.argv[1], sys.argv[2], sys.argv[3]), pool_pre_ping=True)
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database = sys.argv[3]
 
-    Base.metadata.create_all(engine)
+    engine = create_engine(
+        "mysql+mysqldb://{}:{}@localhost:3306/{}".format(
+            username, password, database
+        ),
+        pool_pre_ping=True
+    )
 
     Session = sessionmaker(bind=engine)
     session = Session()
 
-    state = session.query(State).order_by(State.id).first()
-    if state:
-        print(f"{state.id}: {state.name}")
+    first_state = session.query(State).order_by(State.id).first()
+
+    if first_state:
+        print("{}: {}".format(first_state.id, first_state.name))
     else:
         print("Nothing")
+
     session.close()
